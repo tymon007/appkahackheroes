@@ -42,13 +42,29 @@ def sign_in(request):
     return render(request, 'signup.html', {'form': form})
 
 
-def credits(request):
-    return render(request, 'credits.html')
+def me(request):
+    return render(request, 'me.html')
+
+
+def timer(request):
+    return render(request, 'timer.html')
+
+
+def food(request):
+    return render(request, 'food.html')
+
+
+def gas(request):
+    return render(request, 'gas.html')
+
+
+def power(request):
+    return render(request, 'power.html')
 
 
 def water(request):
     return render(request, 'water.html')
 
 
-
-
+def credits(request):
+    return render(request, 'credits.html')

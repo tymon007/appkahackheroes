@@ -1,105 +1,65 @@
-<!DOCTYPE html>
+{% extends 'general/index.html' %}
 
-<html lang="en">
+{% block title %}<title>Food</title>{% endblock %}
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" charset="UTF-8">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <link rel="stylesheet" type="text/css" href="style.css">
-    </head>
+{% block content %}
+<div class="content">
+     <form action = "" method = "POST" enctype = "multipa  rt/form-data">
+           <div class="input-group mb-3">
+                 <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroupFileAddon01">Zdjęcie licznika</span>
+                 </div>
 
-    <body>
-        <div class="table">
-            <div class="greate-column greate-column-2">
-                <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-                    <a class="navbar-brand" href="#" onclick="changepage('mojsejm')">
-                        <img src="purepng.com-cloverclovertrefoiltrefoil-plantstrefoil-flower-1701527699962zbsi1.png" width="50">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                 <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <div id="postlog">
-                                <li class="nav-item active">
-                                    <a id="profile" class="nav-link" href="../index.html" onclick="changepage('profile')">Mój profil
-                                        <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a id="logout" class="nav-link" href="../login/log.html" onclick="authController.logout()">Wyloguj
-                                        <span class="sr-only">(current)</span></a>
-                                </li>
-                            </div>
-                            <div id="postlog">
-                                <li class="nav-item active">
-                                    <a id="login" class="nav-link" href="water.html" onclick="changepage('water')">woda <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a id="rejestracja" class="nav-link" href="power.html" onclick="changepage('power')">prad
-                                        <span class="sr-only">(current)</span></a>
-                                </li>
-                            </div>
-                            <div id="postlog">
-                                <li class="nav-item active">
-                                    <a id="login" class="nav-link" href="gas.html" onclick="changepage('gas')">gaz <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item active">
-                                    <a id="rejestracja" class="nav-link" href="food.html" onclick="changepage('food')">jedzenie
-                                        <span class="sr-only">(current)</span></a>
-                                </li>
-                            </div>
-                        </ul>
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>
-                    </div>
-                </nav>
-                <div class="greate-row content">
-                    <form action = "" method = "POST" enctype = "multipa  rt/form-data">
-                        <label for="inputFile">Zdjecie licznika</label>
-                        <input type="file" id="inputFile">
-                        <button type="submit">Submit</button>
-                    </form>
-                </div>
-                <input type="text" value="Ew. wpisanie danych">
-                <input type="submit" class="btn btn-success" name="Create" value="Submit">
-                <br>
-                <br>
-                <div style="width: 100%; overflow: hidden;"></div>
-                    <div style="position:relative; width: 30%; float: left; margin-left: 200px; height:90%; text-align:center; border:1px solid black; display: inline-block;">
-                        wykres jak mi idzie <br>
-                        że czy rośnie czy maleje 
-                        ale w wartościach takich jak na liczniku  
-                    </div>
-                    <div style="position:relative; width: 30%; float: right; margin-right: 200px; height:90%; text-align:center; border:1px solid black; display: inline-block;">
-                        wykres jak mi idzie <br>
-                        że czy rośnie czy maleje 
-                        ale w procentach %%%%
-                    </div>
-                </div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <div style="width: 100%; overflow: hidden;"></div>
-                    <div style="position:relative; width: 30%; float: left; margin-left: 200px; height:90%; text-align:center; border:1px solid black; display: inline-block;">
-                        wykres jak mi idzie <br>
-                        że czy rośnie czy maleje 
-                        ale w porównaniu ze średnią
-                    </div>
-                    <div style="position:relative; width: 30%; float: right; margin-right: 200px; height:90%; text-align:center; border:1px solid black; display: inline-block;">
-                        a tutaj może jakieś proste <br>
-                        przewidywanie tego co będzie  
-                    </div>
-                </div>
-            </div>
-    </body>
+                      <label class="custom-file-label" for="inputGroupFile01">Wybierz zdjęcie</label>
+                 </div>
+           </div>
 
-</html>
+           <div class="input-group mb-3">
+                 <div class="input-group-prepend">
+                       <span class="input-group-text" id="basic-addon3">Ew. wpisanie danych</span>
+                 </div>
+
+                 <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+           </div>
+
+           <div class="text-align-center">
+                 <div class="inline-block">
+                     <input type="submit" name="Create" value="Submit" class="btn btn-success">
+                     <button type="button" class="btn btn-danger" id="cancel-log-in">Cancel</button>
+                     <a href="{% url 'main_page'%}"></a>
+                 </div>
+           </div>
+     </form>
+
+<!--    <div style="width: 100%; overflow: hidden;"></div>-->
+<!--        <div style="position:relative; width: 30%; float: left; margin-left: 200px; height:90%; text-align:center; border:1px solid black; display: inline-block;">-->
+<!--            wykres jak mi idzie <br>-->
+<!--            że czy rośnie czy maleje-->
+<!--            ale w wartościach takich jak na liczniku-->
+<!--        </div>-->
+<!--        <div style="position:relative; width: 30%; float: right; margin-right: 200px; height:90%; text-align:center; border:1px solid black; display: inline-block;">-->
+<!--            wykres jak mi idzie <br>-->
+<!--            że czy rośnie czy maleje-->
+<!--            ale w procentach %%%%-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <br>-->
+<!--    <br>-->
+<!--    <br>-->
+<!--    <br>-->
+<!--    <div style="width: 100%; overflow: hidden;"></div>-->
+<!--        <div style="position:relative; width: 30%; float: left; margin-left: 200px; height:90%; text-align:center; border:1px solid black; display: inline-block;">-->
+<!--            wykres jak mi idzie <br>-->
+<!--            że czy rośnie czy maleje-->
+<!--            ale w porównaniu ze średnią-->
+<!--        </div>-->
+<!--        <div style="position:relative; width: 30%; float: right; margin-right: 200px; height:90%; text-align:center; border:1px solid black; display: inline-block;">-->
+<!--            a tutaj może jakieś proste <br>-->
+<!--            przewidywanie tego co będzie-->
+<!--        </div>-->
+<!--    </div>-->
+</div>
+{% endblock %}
