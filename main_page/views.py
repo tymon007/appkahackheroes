@@ -38,6 +38,9 @@ def sign_in(request):
     return render(request, 'signup.html', {'form': form})
 
 
+def water(request):
+    return render(request, 'water.html')
+
 
 
 
