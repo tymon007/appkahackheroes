@@ -5,6 +5,6 @@ from django.db import models
 
 class Ciekawostki(models.Model):
     liczbaporzadkowa = models.CharField(max_length=200)
-    ciekawostka = models.TextField(name="ciekawostka")
+    tresc = models.TextField(name="tresc", default="")
 
 

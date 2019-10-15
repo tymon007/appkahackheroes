@@ -3,6 +3,11 @@
 {% block title %}<title>Home page</title>{% endblock %}
 
 {% block content %}
+
+{% if randomowa_ciekawostka %}
+    <p>№{{ randomowa_ciekawostka.liczbaporzadkowa }} - {{randomowa_ciekawostka.tresc }}</p>
+{% endif %}
+
 <div class="content">
     <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis facilisis purus, sit amet iaculis mi. Nam nec laoreet sapien. Phasellus at tristique felis, in condimentum erat. Pellentesque dictum porta pharetra. Quisque dapibus metus vitae dolor interdum, et dictum dui tristique. Ut nec dolor ex. Quisque condimentum odio porta turpis feugiat, malesuada venenatis lacus fermentum. Nunc a felis sodales, placerat nisl quis, volutpat mi. Praesent quis tellus ultricies, iaculis metus eget, malesuada nulla. Proin mi felis, volutpat vitae tellus in, porta iaculis tellus. Nunc commodo nulla sit amet nulla hendrerit, vel vestibulum est rutrum. Sed elit ipsum, tristique et malesuada sollicitudin, bibendum sit amet urna. Pellentesque volutpat massa quis turpis efficitur tempus. Sed iaculis sem et consequat faucibus.

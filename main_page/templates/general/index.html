@@ -67,7 +67,11 @@
 
                     <div class="prelog-alog">
                         <div class="cell btn btn-outline-dark">
-                            <a href="{% url 'logout'%}?next={{request.path}}">Exit</a>
+                            <a href="{% url 'credits' %}">Credits</a>
+                        </div>
+
+                        <div class="cell btn btn-outline-dark">
+                            <a href="{% url 'logout' %}?next={{request.path}}">Exit</a>
                         </div>
                     </div>
 

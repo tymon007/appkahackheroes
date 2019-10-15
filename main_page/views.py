@@ -1,11 +1,15 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
+from .models import Ciekawostki
+import random
 
 from .forms import SignUpForm
 
 
 def main_page(request):
-    return render(request, 'main_page/index.html')
+    ciekawostki = Ciekawostki.objects.all();
+    randomowa_ciekawostka = random.choice(ciekawostki)
+    return render(request, 'main_page/index.html', context={'randomowa_ciekawostka': randomowa_ciekawostka})
 
 
 def log_in(request):
@@ -36,6 +40,10 @@ def sign_in(request):
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+
+
+def credits(request):
+    return render(request, 'credits.html')
 
 
 def water(request):

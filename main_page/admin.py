@@ -6,5 +6,5 @@ from .models import Ciekawostki
 
 @admin.register(Ciekawostki)
 class CiekawostkiAdmin(admin.ModelAdmin):
-    list_display = ('liczbaporzadkowa', 'ciekawostka')
-    fields = ['liczbaporzadkowa', 'ciekawostka']
+    list_display = ('liczbaporzadkowa', 'tresc')
+    fields = ['liczbaporzadkowa', 'tresc']
