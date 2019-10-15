@@ -1,0 +1,65 @@
+* {
+    text-decoration: none;
+    color: #212529;
+}
+
+body {
+    height: 100vh;
+    position: relative;
+    font-family: sans-serif;
+    background-color: rgb(240, 240, 240);
+}
+
+.menu-block {
+    display: table;
+    width: 100%;
+    border-spacing: 10px;
+    text-align: center;
+}
+
+.prelog-alog {
+    display: table-row;
+}
+
+.cell {
+    display: table-cell;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 20px;
+}
+
+.content {
+    padding: 10px;
+}
+
+.navbar-fixed-mine{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+/* begginig of description of content page */
+
+.container-for-log-in {
+    position: absolute;
+    top: 60%;
+    left: 0;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    padding: 10px;
+}
+
+/* end of description of content page */
+
+.text-align-center {
+    text-align: center;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.fa {
+    color: #495057;
+}
