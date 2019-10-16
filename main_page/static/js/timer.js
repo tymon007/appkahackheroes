@@ -1,22 +1,116 @@
 $(document).ready(function () {
-    function Timeout(fn, interval) {
-        var id = setTimeout(fn, interval);
+    function uniqid() {
+        var n = Math.floor((Math.random() * 10000000000000 + Math.random() * 10000000) * 1000 * Math.random() * 10 + Math.random() * Math.random() * 100);
+        var k = Math.floor((Math.random() * 10000000000000 + Math.random() * 10000000) * 1000 * Math.random() * 10 + Math.random() * Math.random() * 100);
+        var time = new Date().getTime();
+        var m = n + k + time.toString();
+        var split1 = m.split("")
+        var split2 = [];
+        for (var i = 0, j = 0; i < split1.length / 2; i++ , j = j + 2) {
+            split2[i] = split1[j] + split1[j + 1];
+            if (split2[i] < 33) split2[i] = split2[i] + 33;
+        }
+        var split3 = [];
+        l = 0;
+        for (var i = 0; i < split2.length; i++) {
+            if (l % 2 == 0) {
+                split3[i] = String.fromCharCode(parseInt(split2[i]));
+                l++;
+            } else {
+                split3[i] = parseInt(split2[i]);
+                l++;
+            }
+        }
+        split4 = split3.join("");
+        return split4;
+    }
+
+    function Timer(fn, interval) {
+        var id = setInterval(fn, interval);
+        var uniqId = uniqid();
         this.cleared = false;
         this.clear = function () {
             this.cleared = true;
-            clearTimeout(id);
+            clearInterval(id);
         };
     }
 
+    function displayTimer(milliseconds) {
+        var hours = Math.floor(milliseconds / 3600000);
+        var minutes = Math.floor((milliseconds - hours * 3600000) / 60000);
+        var seconds = Math.floor((milliseconds - hours * 3600000 - minutes * 60000) / 1000);
+        if (hours < 10) hours = "0" + hours;
+        if (minutes < 10) minutes = "0" + minutes;
+        if (seconds < 10) seconds = "0" + seconds;
+        return hours + ":" + minutes + ":" + seconds;
+    }
+
+    var start = false;
+
+    $("#timer")[0].innerHTML = displayTimer($("#timer")[0].dataset.defaultMilliseconds);
+    $("#timer")[0].setAttribute('data-current-milliseconds', $("#timer")[0].dataset.defaultMilliseconds);
+
     $("#start").on("click", function () {
-        milliseconds = 11000;
-        try {
-            var timer = setTimeout(function () {
+        $("#start")[0].innerHTML = "Restart";
+        $("#start")[0].classList.remove('btn-primary', 'btn-info');
+        $("#start")[0].classList.add('btn-warning');
+        if (!start) {
+            start = true;
+            milliseconds = $("#timer")[0].dataset.currentMilliseconds;
+            timer = new Timer(function () {
                 milliseconds -= 1000;
-                $("#timer")[0].innerHTML = milliseconds;
-            }, 1000);
-        } catch (e) {
-            console.log(e);
+                if (milliseconds == 0) {
+                    $("#start")[0].innerHTML = "Start";
+                    $("#start")[0].classList.remove('btn-warning', 'btn-info');
+                    $("#start")[0].classList.add('btn-primary');
+                    timer.clear();
+                    start = false;
+                    var filename = "/static/sound/poppy_-_time-is-up";
+                    var block = document.createElement('div');
+                    $(".container-for-timer")[0].appendChild(block);
+                    block.innerHTML = '<audio autoplay><source src="' + filename + '.mp3" type="audio/mpeg" /><source src="' + filename + '.ogg" type="audio/ogg" /><embed hidden="true" autostart="true" loop="false" src="' + filename + '.mp3" /></audio>';
+                }
+                $("#timer")[0].innerHTML = displayTimer(milliseconds)
+            }, 1000)
+        } else {
+            $("#timer")[0].innerHTML = displayTimer($("#timer")[0].dataset.defaultMilliseconds);
+            timer.clear();
+            start = false;
+            start = true;
+            milliseconds = $("#timer")[0].dataset.defaultMilliseconds;
+            timer = new Timer(function () {
+                milliseconds -= 1000;
+                if (milliseconds == 0) {
+                    timer.clear();
+                }
+                $("#timer")[0].innerHTML = displayTimer(milliseconds)
+            }, 1000)
         }
+    })
+
+    $("#pause").on("click", function () {
+        if ($("#start")[0].innerHTML == "Restart") {
+            timer.clear();
+            $("#timer")[0].setAttribute('data-current-milliseconds', milliseconds);
+            $("#start")[0].innerHTML = "Continue";
+            $("#start")[0].classList.remove('btn-warning', 'btn-primary');
+            $("#start")[0].classList.add('btn-info')
+            $("#timer")[0].innerHTML = displayTimer($("#timer")[0].dataset.currentMilliseconds);
+            start = false;
+        } else {
+            alert("Wrong");
+            return;
+        }
+    })
+
+    $("#stop").on("click", function () {
+        $("#start")[0].innerHTML = "Start";
+        $("#start")[0].classList.remove('btn-warning', 'btn-info');
+        $("#start")[0].classList.add('btn-primary');
+        $("#timer")[0].innerHTML = displayTimer($("#timer")[0].dataset.defaultMilliseconds);
+        $("#timer")[0].setAttribute('data-current-milliseconds', $("#timer")[0].dataset.defaultMilliseconds);
+        milliseconds = $("#timer")[0].dataset.defaultMilliseconds;
+        timer.clear();
+        start = false;
     })
 });
