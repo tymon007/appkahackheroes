@@ -13,7 +13,7 @@ def main_page(request):
 
 
 def log_in(request):
-    return render(request, 'login.html')
+    return render(request, 'registration/login.html')
 
 
 def auth_login(request):
@@ -39,31 +39,31 @@ def sign_in(request):
             return redirect('main_page')
     else:
         form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'registration/signup.html', {'form': form})
 
 
 def me(request):
-    return render(request, 'me.html')
+    return render(request, 'aboutMe/me.html')
 
 
 def timer(request):
-    return render(request, 'timer.html')
+    return render(request, 'aboutMe/timer.html')
 
 
 def food(request):
-    return render(request, 'food.html')
+    return render(request, 'environment/food.html')
 
 
 def gas(request):
-    return render(request, 'gas.html')
+    return render(request, 'environment/gas.html')
 
 
 def power(request):
-    return render(request, 'power.html')
+    return render(request, 'environment/power.html')
 
 
 def water(request):
-    return render(request, 'water.html')
+    return render(request, 'environment/water.html')
 
 
 def credits(request):
