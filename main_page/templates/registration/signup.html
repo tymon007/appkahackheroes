@@ -3,10 +3,65 @@
 {% block title %}<title>Sign Up</title>{% endblock %}
 
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form>
+<div class="container-for-log-in">
+    <div class="attampt">
+        {% if exeptions %}
+        {% for element in exeptions %}
+        <p>{{ element }}</p>
+        {% endfor %}
+        {% endif %}
+        <form action="{% url 'auth_signin' %}" method="POST">
+            {% csrf_token %}
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Login</span>
+                </div>
+
+                <input type="text" name="username" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+            </div>
+
+            <br>
+
+            <div class="input-group input-group-lg" id="show_hide_password">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Pass</span>
+                </div>
+
+                <input type="password" name="password" lass="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                    </span>
+                </div>
+            </div>
+
+            <div class="input-group input-group-lg" id="show_hide_password">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Pass</span>
+                </div>
+
+                <input type="password" name="password" lass="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                    </span>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="text-align-center">
+                <div class="inline-block">
+                    <input type="submit" class="btn btn-success" name="Create" value="Submit">
+
+                    <button type="button" class="btn btn-danger" id="cancel-log-in">Cancel</button>
+
+                    <a href="/"></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

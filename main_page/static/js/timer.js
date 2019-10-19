@@ -1,30 +1,4 @@
 $(document).ready(function () {
-    function uniqid() {
-        var n = Math.floor((Math.random() * 10000000000000 + Math.random() * 10000000) * 1000 * Math.random() * 10 + Math.random() * Math.random() * 100);
-        var k = Math.floor((Math.random() * 10000000000000 + Math.random() * 10000000) * 1000 * Math.random() * 10 + Math.random() * Math.random() * 100);
-        var time = new Date().getTime();
-        var m = n + k + time.toString();
-        var split1 = m.split("")
-        var split2 = [];
-        for (var i = 0, j = 0; i < split1.length / 2; i++ , j = j + 2) {
-            split2[i] = split1[j] + split1[j + 1];
-            if (split2[i] < 33) split2[i] = split2[i] + 33;
-        }
-        var split3 = [];
-        l = 0;
-        for (var i = 0; i < split2.length; i++) {
-            if (l % 2 == 0) {
-                split3[i] = String.fromCharCode(parseInt(split2[i]));
-                l++;
-            } else {
-                split3[i] = parseInt(split2[i]);
-                l++;
-            }
-        }
-        split4 = split3.join("");
-        return split4;
-    }
-
     function Timer(fn, interval) {
         var id = setInterval(fn, interval);
         var uniqId = uniqid();
@@ -63,6 +37,8 @@ $(document).ready(function () {
                     $("#start")[0].innerHTML = "Start";
                     $("#start")[0].classList.remove('btn-warning', 'btn-info');
                     $("#start")[0].classList.add('btn-primary');
+                    $("#timer")[0].setAttribute('data-current-milliseconds', $("#timer")[0].dataset.defaultMilliseconds);
+                    milliseconds = $("#timer")[0].dataset.defaultMilliseconds;
                     timer.clear();
                     start = false;
                     var filename = "/static/sound/poppy_-_time-is-up";
@@ -104,13 +80,18 @@ $(document).ready(function () {
     })
 
     $("#stop").on("click", function () {
-        $("#start")[0].innerHTML = "Start";
-        $("#start")[0].classList.remove('btn-warning', 'btn-info');
-        $("#start")[0].classList.add('btn-primary');
-        $("#timer")[0].innerHTML = displayTimer($("#timer")[0].dataset.defaultMilliseconds);
-        $("#timer")[0].setAttribute('data-current-milliseconds', $("#timer")[0].dataset.defaultMilliseconds);
-        milliseconds = $("#timer")[0].dataset.defaultMilliseconds;
-        timer.clear();
-        start = false;
+        if ($("#start")[0].innerHTML == "Restart" || $("#start")[0].innerHTML == "Continue") {
+            $("#start")[0].innerHTML = "Start";
+            $("#start")[0].classList.remove('btn-warning', 'btn-info');
+            $("#start")[0].classList.add('btn-primary');
+            $("#timer")[0].innerHTML = displayTimer($("#timer")[0].dataset.defaultMilliseconds);
+            $("#timer")[0].setAttribute('data-current-milliseconds', $("#timer")[0].dataset.defaultMilliseconds);
+            milliseconds = $("#timer")[0].dataset.defaultMilliseconds;
+            timer.clear();
+            start = false;
+        } else {
+            alert("Wrong");
+            return;
+        }
     })
 });

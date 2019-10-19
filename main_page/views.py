@@ -7,7 +7,7 @@ from .forms import SignUpForm
 
 
 def main_page(request):
-    ciekawostki = Ciekawostki.objects.all();
+    ciekawostki = Ciekawostki.objects.all()
     randomowa_ciekawostka = random.choice(ciekawostki)
     return render(request, 'main_page/index.html', context={'randomowa_ciekawostka': randomowa_ciekawostka})
 
@@ -28,18 +28,29 @@ def auth_login(request):
 
 
 def sign_in(request):
+    return render(request, 'registration/signup.html')
+
+
+def auth_signin(request):
+    exeptions = [];
+
     if request.method == 'POST':
+        exeptions.append('Success: Method is POST')
         form = SignUpForm(request.POST)
         if form.is_valid():
+            exeptions[1] = 'Success: Form is valid';
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect('main_page')
+        else:
+            exeptions.append('Some errors detected: Form is invalid')
+            exeptions.append(form)
     else:
-        form = SignUpForm()
-    return render(request, 'registration/signup.html', {'form': form})
+        exeptions.append('Some errors detected: Method is not POST')
+    return render(request, 'registration/signup.html', {'exeptions': exeptions})
 
 
 def me(request):

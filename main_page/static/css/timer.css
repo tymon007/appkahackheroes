@@ -1,12 +1,12 @@
 @font-face {
-    font-family: "Pompadur";
-    src: url("../font-families/Castellar.ttf");
+    font-family: "Castellar";
+    src: url("/static/font-families/Castellar.ttf");
 }
 
 .timer {
     text-align: center;
     font-size: 70px;
-    font-family: Pompadur;
+    font-family: Castellar;
     font-weight: 600;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .buttons .btn {
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .container-for-timer {

@@ -1,65 +1,37 @@
 {% extends 'general/index.html' %}
 
-{% block title %}<title>Food</title>{% endblock %}
+{% block title %}<title>Water</title>{% endblock %}
 
 {% block content %}
 <div class="content">
-     <form action = "" method = "POST" enctype = "multipa  rt/form-data">
-           <div class="input-group mb-3">
-                 <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroupFileAddon01">Zdjęcie licznika</span>
-                 </div>
+      <form action="" method="POST" enctype="multipa  rt/form-data">
+            <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Zdjęcie licznika</span>
+                  </div>
 
-                 <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                  <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
 
-                      <label class="custom-file-label" for="inputGroupFile01">Wybierz zdjęcie</label>
-                 </div>
-           </div>
+                        <label class="custom-file-label" for="inputGroupFile01">Wybierz zdjęcie</label>
+                  </div>
+            </div>
 
-           <div class="input-group mb-3">
-                 <div class="input-group-prepend">
-                       <span class="input-group-text" id="basic-addon3">Ew. wpisanie danych</span>
-                 </div>
+            <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon3">Ew. wpisanie danych</span>
+                  </div>
 
-                 <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-           </div>
+                  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+            </div>
 
-           <div class="text-align-center">
-                 <div class="inline-block">
-                     <input type="submit" name="Create" value="Submit" class="btn btn-success">
-                     <button type="button" class="btn btn-danger" id="cancel-log-in">Cancel</button>
-                     <a href="{% url 'main_page'%}"></a>
-                 </div>
-           </div>
-     </form>
-
-<!--    <div style="width: 100%; overflow: hidden;"></div>-->
-<!--        <div style="position:relative; width: 30%; float: left; margin-left: 200px; height:90%; text-align:center; border:1px solid black; display: inline-block;">-->
-<!--            wykres jak mi idzie <br>-->
-<!--            że czy rośnie czy maleje-->
-<!--            ale w wartościach takich jak na liczniku-->
-<!--        </div>-->
-<!--        <div style="position:relative; width: 30%; float: right; margin-right: 200px; height:90%; text-align:center; border:1px solid black; display: inline-block;">-->
-<!--            wykres jak mi idzie <br>-->
-<!--            że czy rośnie czy maleje-->
-<!--            ale w procentach %%%%-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <br>-->
-<!--    <br>-->
-<!--    <br>-->
-<!--    <br>-->
-<!--    <div style="width: 100%; overflow: hidden;"></div>-->
-<!--        <div style="position:relative; width: 30%; float: left; margin-left: 200px; height:90%; text-align:center; border:1px solid black; display: inline-block;">-->
-<!--            wykres jak mi idzie <br>-->
-<!--            że czy rośnie czy maleje-->
-<!--            ale w porównaniu ze średnią-->
-<!--        </div>-->
-<!--        <div style="position:relative; width: 30%; float: right; margin-right: 200px; height:90%; text-align:center; border:1px solid black; display: inline-block;">-->
-<!--            a tutaj może jakieś proste <br>-->
-<!--            przewidywanie tego co będzie-->
-<!--        </div>-->
-<!--    </div>-->
+            <div class="text-align-center">
+                  <div class="inline-block">
+                        <input type="submit" name="Create" value="Submit" class="btn btn-success">
+                        <button type="button" class="btn btn-danger" id="cancel-log-in">Cancel</button>
+                        <a href="{% url 'main_page'%}"></a>
+                  </div>
+            </div>
+      </form>
 </div>
 {% endblock %}
