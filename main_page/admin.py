@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import Ciekawostki
+from .models import Curiosity
 
 # Register your models here.
 
 
-@admin.register(Ciekawostki)
-class CiekawostkiAdmin(admin.ModelAdmin):
-    list_display = ('liczbaporzadkowa', 'tresc')
-    fields = ['liczbaporzadkowa', 'tresc']
+@admin.register(Curiosity)
+class CuriosityAdmin(admin.ModelAdmin):
+    list_display = ('id', 'text')
+    fields = ['id', 'text']

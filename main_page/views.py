@@ -1,15 +1,15 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
-from .models import Ciekawostki
+from .models import Curiosity
 import random
 
 from .forms import SignUpForm
 
 
 def main_page(request):
-    ciekawostki = Ciekawostki.objects.all()
-    randomowa_ciekawostka = random.choice(ciekawostki)
-    return render(request, 'main_page/index.html', context={'randomowa_ciekawostka': randomowa_ciekawostka})
+    curiosities = Curiosity.objects.all()
+    random_curiosity = random.choice(curiosities)
+    return render(request, 'main_page/index.html', context={'random_curiosity': random_curiosity})
 
 
 def log_in(request):
