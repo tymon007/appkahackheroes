@@ -5,14 +5,25 @@
 {% block content %}
 <div class="container-for-log-in">
     <div class="attampt">
+        {% if exeptions %}
+        {% for element in exeptions %}
+        <p class="alert alert-danger">{{ element }}</p>
+        {% endfor %}
+        {% endif %}
+
+        {% if data %}
+        {% for element in data %}
+        <p class="alert alert-danger">{{ element }}</p>
+        {% endfor %}
+        {% endif %}
         <form action="{% url 'auth_login' %}" method="POST">
             {% csrf_token %}
             <div class="input-group input-group-lg">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">Login</span>
+                    <span class="input-group-text">E-mail</span>
                 </div>
 
-                <input type="text" name="username" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
+                <input type="email" name="email" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" required>
             </div>
 
             <br>

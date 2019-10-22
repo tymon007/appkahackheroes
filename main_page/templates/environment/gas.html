@@ -1,7 +1,5 @@
 {% extends 'general/index.html' %}
 
-{% load static %}
-
 {% block title %}<title>Gas</title>{% endblock %}
 
 {% block content %}
@@ -14,7 +12,7 @@
                   </div>
 
                   <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" onclick="openFileChooser()">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
 
                         <label class="custom-file-label" for="inputGroupFile01">Wybierz zdjęcie</label>
                   </div>
@@ -25,7 +23,7 @@
                         <span class="input-group-text" id="basic-addon3">Ew. wpisanie danych</span>
                   </div>
 
-                  <input type="text" class="form-control" name="value" id="basic-url" aria-describedby="basic-addon3">
+                  <input type="text" class="form-control" name="value" id="basic-url" aria-describedby="basic-addon3" required>
             </div>
 
             <div class="text-align-center">
@@ -36,6 +34,5 @@
                   </div>
             </div>
       </form>
-      <script src="{% static 'js/environment.js' %}"></script>
 </div>
 {% endblock %}

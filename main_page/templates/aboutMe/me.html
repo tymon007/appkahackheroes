@@ -4,8 +4,10 @@
 
 {% block content %}
 <div class="content">
-    <p>Fisrt Name: misza</p>
-    <p>Last Name: misza</p>
-    <p>E-mail: misza@misza.misza</p>
+    {% if user %}
+    <p>Username: {{ user.username }}</p>
+    <p>E-mail: {{ user.email }}</p>
+    <p>How many people live with me: {{ user.howManyPeople }}</p>
+    {% endif %}
 </div>
 {% endblock %}

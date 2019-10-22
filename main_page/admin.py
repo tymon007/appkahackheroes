@@ -6,8 +6,8 @@ from .models import User, Curiosity, Gas, Power, Water
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'username', 'email', 'password', 'salt')
-    fields = ['id', 'username', 'email', 'password', 'salt']
+    list_display = ('id', 'username', 'email', 'password', 'salt', 'howManyPeople')
+    fields = ['id', 'username', 'email', 'password', 'salt', 'howManyPeople']
 
 
 @admin.register(Curiosity)

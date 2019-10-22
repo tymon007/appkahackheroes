@@ -9,6 +9,7 @@ class User(models.Model):
     email = models.EmailField(help_text="Type your email here")
     password = models.CharField(max_length=200, help_text="Type your password here")
     salt = models.CharField(max_length=200, help_text="Salt for password", default="")
+    howManyPeople = models.IntegerField(default=0)
 
 
 class Curiosity(models.Model):
