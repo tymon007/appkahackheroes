@@ -1,7 +1,6 @@
 $(document).ready(function () {
     function Timer(fn, interval) {
         var id = setInterval(fn, interval);
-        var uniqId = uniqid();
         this.cleared = false;
         this.clear = function () {
             this.cleared = true;

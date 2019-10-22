@@ -3,10 +3,7 @@ from .models import User, Curiosity, Gas, Power, Water
 import random
 import re
 import datetime
-
 import hashlib
-
-import time
 import uuid
 
 
@@ -173,9 +170,9 @@ def me(request):
     is_logged = request.session.get('is_logged', False)
     if is_logged:
         mark_is_logged = True
-        return render(request, 'aboutMe/me.html', context={'mark_is_logged': mark_is_logged})
+        user = User.objects.filter(id=request.session.get('id_user'))[0]
+        return render(request, 'aboutMe/me.html', context={'mark_is_logged': mark_is_logged, 'user': user})
     else:
-        mark_is_logged = False
         return redirect('log_out')
 
 
