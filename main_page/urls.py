@@ -11,7 +11,10 @@ urlpatterns = [
     path('timer/', views.timer, name="timer"),
     path('food/', views.food, name="food"),
     path('gas/', views.gas, name="gas"),
+    path('gas/addValue/', views.gas_addValue, name="gas_addValue"),
     path('power/', views.power, name="power"),
+    path('power/addValue/', views.power_addValue, name="power_addValue"),
     path('water/', views.water, name="water"),
+    path('water/addValue/', views.water_addValue, name="water_addValue"),
     path('credits/', views.credits, name="credits"),
 ]

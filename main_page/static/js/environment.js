@@ -9,4 +9,7 @@ $(document).ready(function () {
         };
         reader.readAsText(input.files[0])
     })
+
+
+    .
 });

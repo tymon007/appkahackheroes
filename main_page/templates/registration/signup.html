@@ -7,7 +7,7 @@
     <div class="attampt">
         {% if exeptions %}
         {% for element in exeptions %}
-        <p>{{ element }}</p>
+        <p class="alert alert-danger">{{ element }}</p>
         {% endfor %}
         {% endif %}
         <form action="{% url 'auth_signin' %}" method="POST">

@@ -4,7 +4,8 @@
 
 {% block content %}
 <div class="content">
-      <form action="" method="POST" enctype="multipa  rt/form-data">
+      <form action="{% url 'water_addValue' %}" method="POST" enctype="multipa  rt/form-data">
+            {% csrf_token %}
             <div class="input-group mb-3">
                   <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupFileAddon01">Zdjęcie licznika</span>
@@ -22,7 +23,7 @@
                         <span class="input-group-text" id="basic-addon3">Ew. wpisanie danych</span>
                   </div>
 
-                  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                  <input type="text" class="form-control" name="value" id="basic-url" aria-describedby="basic-addon3">
             </div>
 
             <div class="text-align-center">
