@@ -85,9 +85,12 @@ $(document).ready(function () {
             $("#start")[0].classList.add('btn-primary');
             $("#timer")[0].innerHTML = displayTimer($("#timer")[0].dataset.defaultMilliseconds);
             $("#timer")[0].setAttribute('data-current-milliseconds', $("#timer")[0].dataset.defaultMilliseconds);
+            var was_milliseconds = $("#timer")[0].dataset.defaultMilliseconds - milliseconds;
+            this.parentNode.children[3].setAttribute('href', this.parentNode.children[3].getAttribute('href') + was_milliseconds);
             milliseconds = $("#timer")[0].dataset.defaultMilliseconds;
             timer.clear();
             start = false;
+            this.parentNode.children[3].click();
         } else {
             alert("Wrong");
             return;

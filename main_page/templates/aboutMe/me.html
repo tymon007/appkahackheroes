@@ -1,13 +1,23 @@
 {% extends 'general/index.html' %}
 
-{% block title %}<title>About Me</title>{% endblock %}
+{% block title %}<title>Informacje o użytkowniku</title>{% endblock %}
 
 {% block content %}
 <div class="content">
-    {% if user %}
-    <p>Username: {{ user.username }}</p>
-    <p>E-mail: {{ user.email }}</p>
-    <p>How many people live with me: {{ user.howManyPeople }}</p>
-    {% endif %}
+    <div class="alert alert-primary" style="font-size: 20px;">
+        {% if user %}
+        <br>
+        <p>Nazwa użytkownika: {{ user.username }}</p>
+        <br>
+        <hr>
+        <br>
+        <p>E-mail: {{ user.email }}</p>
+        <br>
+        <hr>
+        <br>
+        <p>Ile osób mieszka ze mną: {{ user.howManyPeople }}</p>
+        <br>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

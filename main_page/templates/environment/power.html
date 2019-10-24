@@ -1,38 +1,48 @@
 {% extends 'general/index.html' %}
 
-{% block title %}<title>Power</title>{% endblock %}
+{% block title %}<title>Prąd</title>{% endblock %}
 
 {% block content %}
 <div class="content">
-      <form action="{% url 'power_addValue' %}" method="POST" enctype="multipa  rt/form-data">
-            {% csrf_token %}
-            <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupFileAddon01">Zdjęcie licznika</span>
-                  </div>
+    <div class="alert alert-warning">
+        Ta funkcjonalność porównuje zużycie prądu z poprzednimi odczytami a także rysuje wykresy oraz porównuje zużycie do średniego i liczy ile dwutlenku węgla zostało wypuszczonego do atmosfery do wyprodukowania zużytej energii. Zastanów się, czy nie warto pomyśleć o próbowaniu ograniczenia zużycia prądu. Pomożesz w ten sposób swojemu portfelowi oraz środowisku.
+    </div>
 
-                  <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-
-                        <label class="custom-file-label" for="inputGroupFile01">Wybierz zdjęcie</label>
-                  </div>
+    <form action="{% url 'power_addValue' %}" method="POST" enctype="multipa  rt/form-data">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Zdjęcie licznika</span>
             </div>
 
-            <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">Ew. wpisanie danych</span>
-                  </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
 
-                  <input type="text" class="form-control" name="value" id="basic-url" aria-describedby="basic-addon3" required>
+                <label class="custom-file-label" for="inputGroupFile01">Wybierz zdjęcie</label>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">Ew. wpisanie danych</span>
             </div>
 
-            <div class="text-align-center">
-                  <div class="inline-block">
-                        <input type="submit" name="Create" value="Submit" class="btn btn-success">
-                        <button type="button" class="btn btn-danger" id="cancel-log-in">Cancel</button>
-                        <a href="{% url 'main_page'%}"></a>
-                  </div>
+            <input type="number" class="form-control" name="value" id="basic-url" aria-describedby="basic-addon3" required>
+
+            <div class="input-group-append">
+                <span class="input-group-text" id="">kWh</span>
             </div>
-      </form>
+        </div>
+
+        <div class="text-align-center">
+            <div class="inline-block">
+                <input type="submit" name="Create" value="Wyślij dane" class="btn btn-success">
+
+                <button type="button" class="btn btn-danger" id="cancel">Anuluj</button>
+
+                <a href="{% url 'main_page'%}"></a>
+            </div>
+        </div>
+    </form>
 </div>
 {% endblock %}

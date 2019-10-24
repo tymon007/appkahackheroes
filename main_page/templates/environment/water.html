@@ -1,38 +1,89 @@
 {% extends 'general/index.html' %}
 
-{% block title %}<title>Water</title>{% endblock %}
+{% load static %}
+
+{% load poll_extras %}
+
+{% block title %}
+<title>Woda</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/environment_graph.css' %}" charset="UTF-8">
+{% endblock %}
 
 {% block content %}
 <div class="content">
-      <form action="{% url 'water_addValue' %}" method="POST" enctype="multipa  rt/form-data">
-            {% csrf_token %}
-            <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupFileAddon01">Zdjęcie licznika</span>
-                  </div>
+    <div class="alert alert-warning">
+        Ta funkcjonalność porównuje zużycie wody z poprzednimi odczytami a także rysuje wykresy. Zastanów się, czy nie warto pomyśleć o próbowaniu ograniczenia zużycia wody. Pomożesz w ten sposób swojemu portfelowi oraz środowisku.
+        P.S. Czy wiedziałeś że tylko 2% zasobów wody na ziemi to woda słodka, przydatna do spożycia przez ludzi?
+    </div>
 
-                  <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-
-                        <label class="custom-file-label" for="inputGroupFile01">Wybierz zdjęcie</label>
-                  </div>
+    <form action="{% url 'water_addValue' %}" method="POST" enctype="multipa  rt/form-data">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Zdjęcie licznika</span>
             </div>
 
-            <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">Ew. wpisanie danych</span>
-                  </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
 
-                  <input type="text" class="form-control" name="value" id="basic-url" aria-describedby="basic-addon3" required>
+                <label class="custom-file-label" for="inputGroupFile01">Wybierz zdjęcie</label>
+            </div>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">Ew. wpisanie danych</span>
             </div>
 
-            <div class="text-align-center">
-                  <div class="inline-block">
-                        <input type="submit" name="Create" value="Submit" class="btn btn-success">
-                        <button type="button" class="btn btn-danger" id="cancel-log-in">Cancel</button>
-                        <a href="{% url 'main_page'%}"></a>
-                  </div>
+            <input type="text" class="form-control" name="value" id="basic-url" aria-describedby="basic-addon3" required>
+
+            <div class="input-group-append">
+                <span class="input-group-text" id="">m<sup>3</sup></span>
             </div>
-      </form>
+        </div>
+
+        <div class="text-align-center">
+            <div class="inline-block">
+                <input type="submit" name="Create" value="Wyślij dane" class="btn btn-success">
+
+                <button type="button" class="btn btn-danger" id="cancel">Anuluj</button>
+
+                <a href="{% url 'main_page' %}"></a>
+            </div>
+        </div>
+    </form>
+
+    <div class="graphs">
+        {% if my_updates %}
+        {% for update in my_updates %}
+        <div>
+            {% for part in update %}
+            {{ part }}
+            {% endfor %}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% if max_value %}
+        {{ max_value }}
+        {% endif %}
+        <br>
+        {% if one_step %}
+        {{ one_step }}76
+        {% endif %}
+        <br>
+        {% if table %}
+        {{ table }}
+        {% endif %}
+
+        <svg class="graph" width="345px" height="345px">
+            <line x1="0%" y1="96.67%" x2="100%" y2="96.67%" stroke="green" stroke-width="1"></line>
+
+            <line x1="3.33%" y1="0%" x2="3.33%" y2="100%" stroke="green" stroke-width="1"></line>
+
+            {% for r in table %}
+            <text x="0%" y="{% widthratio one_step 1 r %}%" font-family="sans-serif" font-size="10px" fill="green">{{ max_value|subtraction:r }}</text>
+            {% endfor %}
+        </svg>
+    </div>
 </div>
 {% endblock %}

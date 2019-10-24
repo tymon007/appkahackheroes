@@ -25,7 +25,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#cancel-log-in").on("click", function () {
+    $("#cancel").on("click", function () {
         this.parentNode.children[2].click();
     })
 });

@@ -10,6 +10,7 @@ urlpatterns = [
     re_path(r'^logout/$', views.logout, name="log_out"),
     re_path(r'^me/$', views.me, name="me"),
     re_path(r'^timer/$', views.timer, name="timer"),
+    re_path(r'^timer/addValue/$', views.timer_addValue, name="timer_addValue"),
     re_path(r'^food/$', views.food, name="food"),
     re_path(r'^gas/$', views.gas, name="gas"),
     re_path(r'^gas/addValue/$', views.gas_addValue, name="gas_addValue"),

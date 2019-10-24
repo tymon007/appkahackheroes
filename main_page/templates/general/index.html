@@ -47,54 +47,54 @@
                     {% if mark_is_logged %}
                     <div class="prelog-alog">
                         <div class="cell btn btn-outline-dark">
-                            <a href="/me/">My profile</a>
+                            <a href="{% url 'me' %}">Moje dane</a>
                         </div>
                     </div>
 
                     <div class="prelog-alog">
                         <div class="cell btn btn-outline-dark">
-                            <a href="/timer/">Timer</a>
+                            <a href="{% url 'timer' %}">Czasomierz</a>
                         </div>
                     </div>
 
                     <div class="prelog-alog">
                         <div class="cell btn btn-outline-dark">
-                            <a href="/food/">Food</a>
+                            <a href="{% url 'food' %}">Jedzenie</a>
                         </div>
 
                         <div class="cell btn btn-outline-dark">
-                            <a href="/gas/">Gas</a>
-                        </div>
-                    </div>
-
-                    <div class="prelog-alog">
-                        <div class="cell btn btn-outline-dark">
-                            <a href="/power/">Power</a>
-                        </div>
-
-                        <div class="cell btn btn-outline-dark">
-                            <a href="/water/">Water</a>
+                            <a href="{% url 'gas' %}">Gaz</a>
                         </div>
                     </div>
 
                     <div class="prelog-alog">
                         <div class="cell btn btn-outline-dark">
-                            <a href="{% url 'credits' %}">Credits</a>
+                            <a href="{% url 'power' %}">Prąd</a>
                         </div>
 
                         <div class="cell btn btn-outline-dark">
-                            <a href="{% url 'logout' %}">Exit</a>
+                            <a href="{% url 'water' %}">Woda</a>
+                        </div>
+                    </div>
+
+                    <div class="prelog-alog">
+                        <div class="cell btn btn-outline-dark">
+                            <a href="{% url 'credits' %}">O nas</a>
+                        </div>
+
+                        <div class="cell btn btn-outline-dark">
+                            <a href="{% url 'logout' %}">Wyloguj</a>
                         </div>
                     </div>
 
                     {% else %}
                     <div class="prelog-alog">
                         <div class="cell btn btn-outline-dark">
-                            <a href="/sign_in/">Sign In</a>
+                            <a href="{% url 'sign_in' %}">Zarejestruj</a>
                         </div>
 
                         <div class="cell btn btn-outline-dark">
-                            <a href="/log_in/">Log In</a>
+                            <a href="{% url 'log_in' %}">Zaloguj</a>
                         </div>
                     </div>
                     {% endif %}

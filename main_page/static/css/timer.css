@@ -1,8 +1,3 @@
-@font-face {
-    font-family: "Castellar";
-    src: url("/static/font-families/Castellar.ttf");
-}
-
 .timer {
     text-align: center;
     font-size: 70px;
@@ -27,10 +22,5 @@
 .container-for-timer {
     width: 100%;
     text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
     padding: 10px;
 }

@@ -16,8 +16,7 @@ def main_page(request):
     is_logged = request.session.get('is_logged', False)
     if is_logged:
         mark_is_logged = True
-        return render(request, 'main_page/index.html', context={'random_curiosity': random_curiosity,
-                                                                'mark_is_logged': mark_is_logged})
+        return render(request, 'main_page/index.html', context={'random_curiosity': random_curiosity, 'mark_is_logged': mark_is_logged})
     else:
         return redirect('log_out')
 
@@ -31,8 +30,7 @@ def log_in(request):
         mark_is_logged = False
         exeptions = request.session.get('exeptions', False)
         request.session['exeptions'] = False
-        return render(request, 'registration/login.html',
-                      context={'mark_is_logged': mark_is_logged, 'exeptions': exeptions})
+        return render(request, 'registration/login.html', context={'mark_is_logged': mark_is_logged, 'exeptions': exeptions})
 
 
 def auth_login(request):
@@ -75,8 +73,7 @@ def sign_in(request):
         mark_is_logged = False
         exeptions = request.session.get('exeptions', False)
         request.session['exeptions'] = False
-        return render(request, 'registration/signup.html',
-                      context={'mark_is_logged': mark_is_logged, 'exeptions': exeptions})
+        return render(request, 'registration/signup.html', context={'mark_is_logged': mark_is_logged, 'exeptions': exeptions})
 
 
 def auth_signin(request):
@@ -85,7 +82,7 @@ def auth_signin(request):
     if is_logged:
         return redirect('main_page')
     else:
-        exeptions = [];
+        exeptions = []
         if request.method == 'POST':
             max_id = 0
             users = User.objects.all()
@@ -147,9 +144,11 @@ def auth_signin(request):
                         request.session['id_user'] = max_id
                         return redirect('main_page')
                     else:
-                        exeptions.append('Some errors detected: Passwords do not match to requires')
+                        exeptions.append(
+                            'Some errors detected: Passwords do not match to requires')
                 else:
-                    exeptions.append('Some errors detected: Email is not valid')
+                    exeptions.append(
+                        'Some errors detected: Email is not valid')
             else:
                 exeptions.append('Some errors detected: Username is not valid')
         else:
@@ -186,6 +185,24 @@ def timer(request):
         return redirect('log_out')
 
 
+def timer_addValue(request):
+    # checking if user logged in
+    is_logged = request.session.get('is_logged', False)
+    if is_logged:
+        if request.method == 'GET':
+            idOfUser = request.session.get('id_user')  # id of update
+
+            today = datetime.datetime.now()
+            date = today.strftime("%Y-%m-%d")  # date of update
+
+            value = float(request.GET.get('time')) * 0.0000002  # value of update
+
+            water_instance = Water.objects.create(idOfUser=idOfUser, date=date, value=value)
+        return redirect('timer')
+    else:
+        return redirect('log_out')
+
+
 def food(request):
     # checking if user logged in
     is_logged = request.session.get('is_logged', False)
@@ -215,7 +232,7 @@ def gas_addValue(request):
         today = datetime.datetime.now()
         date = today.strftime("%Y-%m-%d")  # date of update
 
-        value = request.POST.get('value');  # value of update
+        value = request.POST.get('value')  # value of update
 
         gas_instance = Gas.objects.create(idOfUser=idOfUser, date=date, value=value)
         return redirect('gas')
@@ -242,7 +259,7 @@ def power_addValue(request):
         today = datetime.datetime.now()
         date = today.strftime("%Y-%m-%d")  # date of update
 
-        value = request.POST.get('value');  # value of update
+        value = request.POST.get('value')  # value of update
 
         power_instance = Power.objects.create(idOfUser=idOfUser, date=date, value=value)
         return redirect('power')
@@ -255,7 +272,44 @@ def water(request):
     is_logged = request.session.get('is_logged', False)
     if is_logged:
         mark_is_logged = True
-        return render(request, 'environment/water.html', context={'mark_is_logged': mark_is_logged})
+
+        my_updates_water = Water.objects.filter(idOfUser=request.session.get('id_user')).order_by('date', 'value')
+
+        m_data = []
+        i = 0
+        max_value = 0
+
+        for data in my_updates_water:
+            m_data.append([round(int(float(data.value)), -1), data.date])
+            if max_value < m_data[i][0]:
+                max_value = m_data[i][0]
+            i = i + 1
+
+        table = []
+        i = 1
+        while True:
+            table.append(i)
+            i = i + 1
+            if (max_value / 100 - i) < 0:
+                break
+
+        n_table = []
+        i = len(table) - 1
+        while True:
+            n_table.append(table[i])
+            i = i - 1
+            if i < 0:
+                break
+
+        del table
+        table = n_table
+
+        max_value = int(max_value / 100)
+        one_step = (100 / max_value)
+
+        return render(request, 'environment/water.html', context={'mark_is_logged': mark_is_logged,
+                                                                  'my_updates': m_data, 'max_value': max_value,
+                                                                  'table': table, 'one_step': one_step})
     else:
         return redirect('log_out')
 
@@ -269,9 +323,10 @@ def water_addValue(request):
         today = datetime.datetime.now()
         date = today.strftime("%Y-%m-%d")  # date of update
 
-        value = request.POST.get('value');  # value of update
+        value = request.POST.get('value')  # value of update
 
-        water_instance = Water.objects.create(idOfUser=idOfUser, date=date, value=value)
+        water_instance = Water.objects.create(
+            idOfUser=idOfUser, date=date, value=value)
         return redirect('water')
     else:
         return redirect('log_out')
