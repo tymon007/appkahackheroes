@@ -1,5 +1,10 @@
 from django.shortcuts import render, redirect
 from .models import User, Curiosity, Gas, Power, Water
+import matplotlib.pyplot as plt
+
+from .forms import UploadFileForm
+# from PIL import Image
+
 import random
 import re
 import datetime
@@ -16,7 +21,8 @@ def main_page(request):
     is_logged = request.session.get('is_logged', False)
     if is_logged:
         mark_is_logged = True
-        return render(request, 'main_page/index.html', context={'random_curiosity': random_curiosity, 'mark_is_logged': mark_is_logged})
+        return render(request, 'main_page/index.html',
+                      context={'random_curiosity': random_curiosity, 'mark_is_logged': mark_is_logged})
     else:
         return redirect('log_out')
 
@@ -30,7 +36,8 @@ def log_in(request):
         mark_is_logged = False
         exeptions = request.session.get('exeptions', False)
         request.session['exeptions'] = False
-        return render(request, 'registration/login.html', context={'mark_is_logged': mark_is_logged, 'exeptions': exeptions})
+        return render(request, 'registration/login.html',
+                      context={'mark_is_logged': mark_is_logged, 'exeptions': exeptions})
 
 
 def auth_login(request):
@@ -73,7 +80,8 @@ def sign_in(request):
         mark_is_logged = False
         exeptions = request.session.get('exeptions', False)
         request.session['exeptions'] = False
-        return render(request, 'registration/signup.html', context={'mark_is_logged': mark_is_logged, 'exeptions': exeptions})
+        return render(request, 'registration/signup.html',
+                      context={'mark_is_logged': mark_is_logged, 'exeptions': exeptions})
 
 
 def auth_signin(request):
@@ -218,7 +226,32 @@ def gas(request):
     is_logged = request.session.get('is_logged', False)
     if is_logged:
         mark_is_logged = True
-        return render(request, 'environment/gas.html', context={'mark_is_logged': mark_is_logged})
+        my_updates_gas = Gas.objects.filter(idOfUser=request.session.get('id_user')).order_by('date', 'value')
+        howManyPeople = User.objects.filter(id=request.session.get('id_user'))[0].howManyPeople
+
+        sum = 0
+        for i in my_updates_gas:
+            sum += float(i.value)
+
+        diff_date = (my_updates_gas[len(my_updates_gas) - 1].date - my_updates_gas[0].date)
+
+        if diff_date.days != 0:
+            srednio_na_osobe = float(sum / diff_date.days)
+
+            srednio_na_osobe *= 365.25
+
+            srednio_na_osobe /= howManyPeople
+
+            if srednio_na_osobe > 300:
+                result = 'Powyżej średniej krajowej. Twoja średnia na rok to - ' + str(
+                    srednio_na_osobe) + ', srednia krajowa to - 220,5 m3 +- 79,5 m3'
+            else:
+                result = 'Bardzo dobrze. Twoja średnia na rok to - ' + str(
+                    srednio_na_osobe) + ', srednia krajowa to - 220,5 m3 +- 79,5 m3'
+        else:
+            result = 'Nie masz wpisów'
+
+        return render(request, 'environment/gas.html', context={'mark_is_logged': mark_is_logged, 'result': result})
     else:
         return redirect('log_out')
 
@@ -245,7 +278,32 @@ def power(request):
     is_logged = request.session.get('is_logged', False)
     if is_logged:
         mark_is_logged = True
-        return render(request, 'environment/power.html', context={'mark_is_logged': mark_is_logged})
+        my_updates_power = Power.objects.filter(idOfUser=request.session.get('id_user')).order_by('date', 'value')
+        howManyPeople = User.objects.filter(id=request.session.get('id_user'))[0].howManyPeople
+
+        sum = 0
+        for i in my_updates_power:
+            sum += float(i.value)
+
+        diff_date = (my_updates_power[len(my_updates_power) - 1].date - my_updates_power[0].date)
+
+        if diff_date.days != 0:
+            srednio_na_osobe = float(sum / diff_date.days)
+
+            srednio_na_osobe *= 365.25
+
+            srednio_na_osobe /= howManyPeople
+
+            if srednio_na_osobe > 300:
+                result = 'Powyżej średniej krajowej. Twoja średnia na rok to - ' + str(
+                    srednio_na_osobe) + ', srednia krajowa to - 220,5 m3 +- 79,5 m3'
+            else:
+                result = 'Bardzo dobrze. Twoja średnia na rok to - ' + str(
+                    srednio_na_osobe) + ', srednia krajowa to - 220,5 m3 +- 79,5 m3'
+        else:
+            result = 'Nie masz wpisów'
+
+        return render(request, 'environment/power.html', context={'mark_is_logged': mark_is_logged, 'result': result})
     else:
         return redirect('log_out')
 
@@ -267,49 +325,76 @@ def power_addValue(request):
         return redirect('log_out')
 
 
+def power_cropAddValue(request):
+    is_logged = request.session.get('is_logged', False)
+    if is_logged:
+        if request.method == 'POST':
+            mark_is_logged = True
+
+            image = request.FILES.get('file_image', False)
+
+            def handle_uploaded_file(f):
+                with open('some/file/name.txt', 'wb+') as destination:
+                    for chunk in f.chunks():
+                        destination.write(chunk)
+
+            form = UploadFileForm(request.POST, request.FILES)
+            if form.is_valid():
+                handle_uploaded_file(request.FILES['file'])
+
+
+            data = request.POST.get('data', False)
+            fields = data.split('&')
+            values = {
+                'x': float(fields[0].split('=')[1]),
+                'y': float(fields[1].split('=')[1]),
+                'width': float(fields[2].split('=')[1]),
+                'height': float(fields[3].split('=')[1]),
+                'scaleX': float(fields[4].split('=')[1]),
+                'scaleY': float(fields[5].split('=')[1]),
+            }
+
+            return render(request, 'environment/power_crop_add_value.html', context={'mark_is_logged': mark_is_logged,
+                                                                                     'image': image, 'data': values})
+        else:
+            mark_is_logged = True
+            return render(request, 'environment/power_crop_add_value.html', context={'mark_is_logged': mark_is_logged,
+                                                                                     'error': 'error'})
+    else:
+        return redirect('log_out')
+
+
 def water(request):
     # checking if user logged in
     is_logged = request.session.get('is_logged', False)
     if is_logged:
         mark_is_logged = True
-
         my_updates_water = Water.objects.filter(idOfUser=request.session.get('id_user')).order_by('date', 'value')
+        howManyPeople = User.objects.filter(id=request.session.get('id_user'))[0].howManyPeople
 
-        m_data = []
-        i = 0
-        max_value = 0
+        sum = 0
+        for i in my_updates_water:
+            sum += float(i.value)
 
-        for data in my_updates_water:
-            m_data.append([round(int(float(data.value)), -1), data.date])
-            if max_value < m_data[i][0]:
-                max_value = m_data[i][0]
-            i = i + 1
+        diff_date = (my_updates_water[len(my_updates_water) - 1].date - my_updates_water[0].date)
 
-        table = []
-        i = 1
-        while True:
-            table.append(i)
-            i = i + 1
-            if (max_value / 100 - i) < 0:
-                break
+        if diff_date.days != 0:
+            srednio_na_osobe = float(sum / diff_date.days)
 
-        n_table = []
-        i = len(table) - 1
-        while True:
-            n_table.append(table[i])
-            i = i - 1
-            if i < 0:
-                break
+            srednio_na_osobe *= 365.25
 
-        del table
-        table = n_table
+            srednio_na_osobe /= howManyPeople
 
-        max_value = int(max_value / 100)
-        one_step = (100 / max_value)
+            if srednio_na_osobe > 300:
+                result = 'Powyżej średniej krajowej. Twoja średnia na rok to - ' + str(
+                    srednio_na_osobe) + ', srednia krajowa to - 220,5 m3 +- 79,5 m3'
+            else:
+                result = 'Bardzo dobrze. Twoja średnia na rok to - ' + str(
+                    srednio_na_osobe) + ', srednia krajowa to - 220,5 m3 +- 79,5 m3'
+        else:
+            result = 'Nie masz wpisów'
 
-        return render(request, 'environment/water.html', context={'mark_is_logged': mark_is_logged,
-                                                                  'my_updates': m_data, 'max_value': max_value,
-                                                                  'table': table, 'one_step': one_step})
+        return render(request, 'environment/water.html', context={'mark_is_logged': mark_is_logged, 'result': result})
     else:
         return redirect('log_out')
 

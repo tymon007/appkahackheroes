@@ -1,0 +1,29 @@
+{% extends 'general/index.html' %}
+
+{% block title %}<title>Attampt</title>{% endblock %}
+
+{% block content %}
+<div class="content">
+    {% if image %}
+    {% for element in image %}
+    {{ element }}
+    {% endfor %}
+    {% else %}
+    ERROR
+    {% endif %}
+
+    <br>
+
+    {% if error %}
+    {{ error }}
+    {% endif %}
+
+    <br>
+
+    {% if data %}
+    {{ data }}
+    {% else %}
+    ERROR
+    {% endif %}
+</div>
+{% endblock %}

@@ -30,7 +30,7 @@
             <input type="number" class="form-control" name="value" id="basic-url" aria-describedby="basic-addon3" required>
 
             <div class="input-group-append">
-                <span class="input-group-text" id="">kWh</span>
+                <span class="input-group-text" id="">m<sup>3</sup></span>
             </div>
         </div>
 
@@ -44,5 +44,9 @@
             </div>
         </div>
     </form>
+
+    {% if result %}
+    <div class="alert alert-info">{{ result }}</div>
+    {% endif %}
 </div>
 {% endblock %}

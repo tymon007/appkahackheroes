@@ -53,37 +53,8 @@
         </div>
     </form>
 
-    <div class="graphs">
-        {% if my_updates %}
-        {% for update in my_updates %}
-        <div>
-            {% for part in update %}
-            {{ part }}
-            {% endfor %}
-        </div>
-        {% endfor %}
-        {% endif %}
-        {% if max_value %}
-        {{ max_value }}
-        {% endif %}
-        <br>
-        {% if one_step %}
-        {{ one_step }}76
-        {% endif %}
-        <br>
-        {% if table %}
-        {{ table }}
-        {% endif %}
-
-        <svg class="graph" width="345px" height="345px">
-            <line x1="0%" y1="96.67%" x2="100%" y2="96.67%" stroke="green" stroke-width="1"></line>
-
-            <line x1="3.33%" y1="0%" x2="3.33%" y2="100%" stroke="green" stroke-width="1"></line>
-
-            {% for r in table %}
-            <text x="0%" y="{% widthratio one_step 1 r %}%" font-family="sans-serif" font-size="10px" fill="green">{{ max_value|subtraction:r }}</text>
-            {% endfor %}
-        </svg>
-    </div>
+    {% if result %}
+    <div class="alert alert-info">{{ result }}</div>
+    {% endif %}
 </div>
 {% endblock %}

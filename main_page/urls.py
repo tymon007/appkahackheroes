@@ -16,6 +16,7 @@ urlpatterns = [
     re_path(r'^gas/addValue/$', views.gas_addValue, name="gas_addValue"),
     re_path(r'^power/$', views.power, name="power"),
     re_path(r'^power/addValue/$', views.power_addValue, name="power_addValue"),
+    re_path(r'^power/cropAddValue/$', views.power_cropAddValue, name="power_cropAddValue"),
     re_path(r'^water/$', views.water, name="water"),
     re_path(r'^water/addValue/$', views.water_addValue, name="water_addValue"),
     re_path(r'^credits/$', views.credits, name="credits"),

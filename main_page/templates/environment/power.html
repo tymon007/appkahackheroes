@@ -1,6 +1,11 @@
 {% extends 'general/index.html' %}
 
-{% block title %}<title>Prąd</title>{% endblock %}
+{% load static %}
+
+{% block title %}
+<title>Prąd</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/m_cropper.css' %}" charset="UTF-8">
+{% endblock %}
 
 {% block content %}
 <div class="content">
@@ -44,5 +49,29 @@
             </div>
         </div>
     </form>
+
+    <div class="input">
+        <button class="btn btn-primary" id="btn_load_image">Upload</button>
+        <button class="btn btn-info" id="crop_loaded_image">Crop</button>
+    </div>
+
+    <div>
+        <img id="image" src="">
+    </div>
+
+    <div id="output"></div>
+
+    <form action="/power/cropAddValue/" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="file_image" id="file_load_image">
+        <input type="hidden" name="data" value="" id="hidden-data">
+        <input type="submit" name="send" value="success" class="display-none" id="send-data">
+    </form>
+
+    {% if result %}
+    <div class="alert alert-info">{{ result }}</div>
+    {% endif %}
+
+    <script src="{% static 'js/m_cropper.js' %}"></script>
 </div>
 {% endblock %}
