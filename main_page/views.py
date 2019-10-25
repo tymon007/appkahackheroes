@@ -3,7 +3,7 @@ from .models import User, Curiosity, Gas, Power, Water
 import matplotlib.pyplot as plt
 
 from .forms import UploadFileForm
-# from PIL import Image
+from PIL import Image
 
 import random
 import re
@@ -341,14 +341,15 @@ def power_cropAddValue(request):
 
             image = request.FILES.get('file_image', False)
 
-            def handle_uploaded_file(f):
-                with open('some/file/name.txt', 'wb+') as destination:
-                    for chunk in f.chunks():
-                        destination.write(chunk)
+            # def handle_uploaded_file(f):
+            #     with open('some/file/name.txt', 'wb+') as destination:
+            #         for chunk in f.chunks():
+            #             destination.write(chunk)
 
             form = UploadFileForm(request.POST, request.FILES)
-            if form.is_valid():
-                handle_uploaded_file(request.FILES['file'])
+            # if form.is_valid():
+                # handle_uploaded_file(request.FILES['file'])
+
 
 
             data = request.POST.get('data', False)
@@ -362,8 +363,18 @@ def power_cropAddValue(request):
                 'scaleY': float(fields[5].split('=')[1]),
             }
 
+            im = Image.open(image)
+            width, height = im.size
+            left = values.get('x')
+            top = values.get('y')
+            right = width - left - values.get('width')
+            bottom = height - top - values.get('height')
+            im1 = im.crop((left, top, right, bottom))
+            # im1.show()
+
             return render(request, 'environment/power_crop_add_value.html', context={'mark_is_logged': mark_is_logged,
-                                                                                     'image': image, 'data': values})
+                                                                                     'image': image, 'data': values,
+                                                                                     'width': width, 'height': height})
         else:
             mark_is_logged = True
             return render(request, 'environment/power_crop_add_value.html', context={'mark_is_logged': mark_is_logged,

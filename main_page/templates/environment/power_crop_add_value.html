@@ -5,17 +5,22 @@
 {% block content %}
 <div class="content">
     {% if image %}
-    {% for element in image %}
-    {{ element }}
-    {% endfor %}
-    {% else %}
-    ERROR
+<!--    {% for element in image %}-->
+    {{ image }}
+<!--    {% endfor %}-->
+<!--    {% else %}-->
+<!--    ERROR-->
     {% endif %}
 
     <br>
 
     {% if error %}
     {{ error }}
+    {% endif %}
+
+
+    {% if im1 %}
+    {{ im1 }}
     {% endif %}
 
     <br>
