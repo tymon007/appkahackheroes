@@ -233,6 +233,10 @@ def gas(request):
         for i in my_updates_gas:
             sum += float(i.value)
 
+        if len(my_updates_gas) == 0:
+            result = 'Nie masz wpisów'
+            return render(request, 'environment/gas.html', context={'mark_is_logged': mark_is_logged, 'result': result})
+
         diff_date = (my_updates_gas[len(my_updates_gas) - 1].date - my_updates_gas[0].date)
 
         if diff_date.days != 0:
@@ -284,6 +288,10 @@ def power(request):
         sum = 0
         for i in my_updates_power:
             sum += float(i.value)
+
+        if len(my_updates_power) == 0:
+            result = 'Nie masz wpisów'
+            return render(request, 'environment/power.html', context={'mark_is_logged': mark_is_logged, 'result': result})
 
         diff_date = (my_updates_power[len(my_updates_power) - 1].date - my_updates_power[0].date)
 
@@ -375,6 +383,11 @@ def water(request):
         sum = 0
         for i in my_updates_water:
             sum += float(i.value)
+
+        if len(my_updates_water) == 0:
+            result = 'Nie masz wpisów'
+            return render(request, 'environment/water.html',
+                          context={'mark_is_logged': mark_is_logged, 'result': result})
 
         diff_date = (my_updates_water[len(my_updates_water) - 1].date - my_updates_water[0].date)
 
